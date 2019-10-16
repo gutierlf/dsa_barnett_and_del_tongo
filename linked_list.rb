@@ -1,9 +1,9 @@
 class LinkedList
-  def initialize(value=nil)
+  def initialize(value=NullNode.new)
     @head =
       case value
-      when nil
-        NullNode
+      when NullNode
+        NullNode.new
       when Node
         value
       else
@@ -15,8 +15,14 @@ class LinkedList
     self.class.new(Node.new(value, head))
   end
 
+  def remove(value)
+    if head.value == value
+      self.class.new(head.next_node)
+    end
+  end
+
   def contains?(value)
-    if head == NullNode
+    if head.is_a?(NullNode)
       false
     elsif head.value == value
       true
@@ -26,7 +32,7 @@ class LinkedList
   end
 
   def empty?
-    head == NullNode
+    head.is_a?(NullNode)
   end
 
   NullNode = Class.new
