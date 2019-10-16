@@ -5,8 +5,8 @@ RSpec.describe LinkedList do
     expect(subject).to be_empty
   end
 
-  it "starts adding data at the head" do
-    expect(subject.add("data").head).to eq "data"
+  it "holds data" do
+    expect(subject.add("data").contains?("data")).to be true
   end
 
   it "is not empty when it has data" do
