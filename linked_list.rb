@@ -18,7 +18,6 @@ class LinkedList
   def remove(value)
     return self if empty?
 
-    rest = self.class.new(head.next_node)
     if head.value == value
       rest
     else
@@ -32,7 +31,7 @@ class LinkedList
     elsif head.value == value
       true
     else
-      self.class.new(head.next_node).contains?(value)
+      rest.contains?(value)
     end
   end
 
@@ -42,7 +41,7 @@ class LinkedList
 
   def to_a
     return [] if empty?
-    [head.value] + self.class.new(head.next_node).to_a
+    [head.value] + rest.to_a
   end
 
   NullNode = Class.new
@@ -53,4 +52,8 @@ class LinkedList
   private
 
   attr_reader :head
+
+  def rest
+    self.class.new(head.next_node)
+  end
 end
