@@ -2,7 +2,7 @@ require_relative 'linked_list'
 
 RSpec.describe LinkedList do
   subject(:empty_list) { LinkedList.new }
-  
+
   it "begins empty" do
     expect(empty_list).to be_empty
   end
@@ -40,10 +40,29 @@ RSpec.describe LinkedList do
     expect(second.contains?("second")).to be true
   end
 
-  it "responds to #to_a" do
+  it "#to_a" do
     expect(empty_list.to_a).to eq []
-    first_and_second = empty_list.add("first").add("second")
+    first = empty_list.add("first")
+    expect(first.to_a).to eq ["first"]
+    first_and_second = first.add("second")
     expect(first_and_second.to_a).to eq %w(second first)
+  end
+
+  it "#reverse" do
+    expect(empty_list.reverse).to be_empty
+    first_and_second = empty_list.add("first").add("second")
+    expect(first_and_second.reverse.to_a).to eq %w(first second)
+    and_third = first_and_second.add("third")
+    expect(and_third.reverse.to_a).to eq %w(first second third)
+  end
+
+  it "#prepend" do
+    expect(empty_list.prepend("first").to_a).to eq ["first"]
+    second_and_first = empty_list.add("first").prepend("second")
+    expect(second_and_first.to_a).to eq %w(first second)
+    first_and_second = empty_list.add("first").add("second")
+    third_and_first_and_second = first_and_second.prepend("third")
+    expect(third_and_first_and_second.to_a).to eq %w(second first third)
   end
 end
 
@@ -57,7 +76,7 @@ describe LinkedList::Node do
   end
 
   it "starts pointing to NullNode" do
-    expect(LinkedList::Node.new(5).next_node).to eq LinkedList::NullNode
+    expect(LinkedList::Node.new(5).next_node).to be_a LinkedList::NullNode
   end
 end
 

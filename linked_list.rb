@@ -39,6 +39,16 @@ class LinkedList
     head.is_a?(NullNode)
   end
 
+  def reverse
+    return self if empty?
+    rest.reverse.prepend(head.value)
+  end
+
+  def prepend(value)
+    return self.add(value) if empty?
+    rest.prepend(value).add(head.value)
+  end
+
   def to_a
     return [] if empty?
     [head.value] + rest.to_a
@@ -46,7 +56,7 @@ class LinkedList
 
   NullNode = Class.new
   Node = Struct.new(:value, :next_node) do
-    def initialize(value, next_node=NullNode); super end
+    def initialize(value, next_node=NullNode.new); super end
   end
 
   private
