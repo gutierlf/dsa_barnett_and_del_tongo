@@ -21,8 +21,23 @@ RSpec.describe LinkedList do
     expect(linked_list.contains?("second")).to be true
   end
 
-  it "allows data removal" do
+  it "allows data removal from empty list" do
+    expect(empty_list.remove("not present")).to be_empty
+  end
+
+  it "allows data removal from head" do
     expect(empty_list.add("data").remove("data").contains?("data")).to be false
+    first_and_second = empty_list.add("first").add("second")
+    first = first_and_second.remove("second")
+    expect(first.contains?("second")).to be false
+    expect(first.contains?("first")).to be true
+  end
+
+  it "allows data removal from non-head positions" do
+    first_and_second = empty_list.add("first").add("second")
+    second = first_and_second.remove("first")
+    expect(second.contains?("first")).to be false
+    expect(second.contains?("second")).to be true
   end
 end
 

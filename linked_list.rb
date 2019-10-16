@@ -16,8 +16,13 @@ class LinkedList
   end
 
   def remove(value)
+    return self if head.is_a?(NullNode)
+
+    rest = self.class.new(head.next_node)
     if head.value == value
-      self.class.new(head.next_node)
+      rest
+    else
+      rest.remove(value).add(head.value)
     end
   end
 
