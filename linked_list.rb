@@ -40,6 +40,11 @@ class LinkedList
     head.is_a?(NullNode)
   end
 
+  def to_a
+    return [] if empty?
+    [head.value] + self.class.new(head.next_node).to_a
+  end
+
   NullNode = Class.new
   Node = Struct.new(:value, :next_node) do
     def initialize(value, next_node=NullNode); super end

@@ -39,6 +39,12 @@ RSpec.describe LinkedList do
     expect(second.contains?("first")).to be false
     expect(second.contains?("second")).to be true
   end
+
+  it "responds to #to_a" do
+    expect(empty_list.to_a).to eq []
+    first_and_second = empty_list.add("first").add("second")
+    expect(first_and_second.to_a).to eq %w(second first)
+  end
 end
 
 describe LinkedList::Node do
