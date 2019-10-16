@@ -1,18 +1,32 @@
 class LinkedList
   def initialize(value=nil)
-    @head = value
+    @head =
+      case value
+      when nil
+        NullNode
+      when Node
+        value
+      else
+        Node.new(value)
+      end
   end
 
   def add(value)
-    self.class.new(value)
+    self.class.new(Node.new(value, head))
   end
 
   def contains?(value)
-    head == value
+    if head == NullNode
+      false
+    elsif head.value == value
+      true
+    else
+      self.class.new(head.next_node).contains?(value)
+    end
   end
 
   def empty?
-    !head
+    head == NullNode
   end
 
   NullNode = Class.new
