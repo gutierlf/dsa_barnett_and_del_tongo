@@ -2,9 +2,7 @@ class LinkedList
   def initialize(value=NullNode.new)
     @head =
       case value
-      when NullNode
-        NullNode.new
-      when Node
+      when Node, NullNode
         value
       else
         Node.new(value)
