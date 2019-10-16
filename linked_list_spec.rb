@@ -8,4 +8,8 @@ RSpec.describe LinkedList do
   it "starts adding data at the head" do
     expect(subject.add("data").head).to eq "data"
   end
+
+  it "is not empty when it has data" do
+    expect(subject.add("data")).not_to be_empty
+  end
 end

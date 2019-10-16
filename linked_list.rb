@@ -10,6 +10,6 @@ class LinkedList
   end
 
   def empty?
-    true
+    !head
   end
 end
