@@ -16,7 +16,7 @@ class LinkedList
   end
 
   def remove(value)
-    return self if head.is_a?(NullNode)
+    return self if empty?
 
     rest = self.class.new(head.next_node)
     if head.value == value
@@ -27,7 +27,7 @@ class LinkedList
   end
 
   def contains?(value)
-    if head.is_a?(NullNode)
+    if empty?
       false
     elsif head.value == value
       true
